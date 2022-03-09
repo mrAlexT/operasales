@@ -1,23 +1,25 @@
 package com.example.operasales.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.GenericGenerator;
 
-import java.util.UUID;
+import javax.persistence.*;
 
+@Entity
 @Data
+@Check(constraints = "status in (0,1)")
 public class Place {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
     private int number;
     private int status;
+    @ManyToOne
+    @JoinColumn(name = "opera_event_id")
     private OperaEvent operaEvent;
-    private int buyer;
 
-    public Place(int number, int status, OperaEvent operaEvent, int buyer) {
-        this.id = UUID.randomUUID().toString();
-        this.number = number;
-        this.status = status;
-        this.operaEvent = operaEvent;
-        this.buyer = buyer;
+    public Place() {
     }
-
 }
