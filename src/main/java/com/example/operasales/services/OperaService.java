@@ -1,7 +1,7 @@
 package com.example.operasales.services;
 
 import com.example.operasales.domain.Opera;
-import com.example.operasales.repository.jpa.JpaOperaRepository;
+import com.example.operasales.repository.OperaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Service
 public class OperaService {
-    private JpaOperaRepository repository;
+    private OperaRepository repository;
 
     @Autowired
-    public OperaService(JpaOperaRepository repository) {
+    public OperaService(OperaRepository repository) {
         this.repository = repository;
     }
 

@@ -2,24 +2,29 @@ package com.example.operasales.services;
 
 import com.example.operasales.domain.Opera;
 import com.example.operasales.domain.OperaEvent;
+import com.example.operasales.domain.OrderEvent;
 import com.example.operasales.domain.Place;
-import com.example.operasales.repository.jpa.JpaOperaEventRepository;
-import com.example.operasales.repository.jpa.JpaPlaceRepository;
+import com.example.operasales.repository.OperaEventRepository;
+import com.example.operasales.repository.OrderRepository;
+import com.example.operasales.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Service
 public class OperaEventService {
-    private JpaOperaEventRepository repository;
-    private JpaPlaceRepository placeRepository;
+    private OperaEventRepository repository;
+    private PlaceRepository placeRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    public OperaEventService(JpaOperaEventRepository repository, JpaPlaceRepository placeRepository) {
+    public OperaEventService(OperaEventRepository repository, PlaceRepository placeRepository, OrderRepository orderRepository) {
         this.repository = repository;
         this.placeRepository = placeRepository;
+        this.orderRepository = orderRepository;
     }
 
     public OperaEvent createOperaEvent(LocalDateTime time, Opera opera, int maxSeats) {
@@ -49,7 +54,14 @@ public class OperaEventService {
         repository.deleteAll();
     }
 
-    public void setBookEvent(OperaEvent operaEvent, int number) {
+    /**
+     * Бронирование места
+     *
+     * @param operaEvent Мероприятие
+     * @param number     Номер места
+     * @return
+     */
+    private Place setBookEvent(OperaEvent operaEvent, int number) {
         if (number > operaEvent.getMaxSeats()) {
             throw new RuntimeException("Количество мест не более " + operaEvent.getMaxSeats());
         }
@@ -68,10 +80,17 @@ public class OperaEventService {
             place.setStatus(1);
         }
 
-        placeRepository.save(place);
+        return placeRepository.save(place);
     }
 
-    public void cancelBookEvent(OperaEvent operaEvent, int number) {
+    /**
+     * Отмена бронирования места
+     *
+     * @param operaEvent Мероприятие
+     * @param number     Номер места
+     * @return
+     */
+    private void cancelBookEvent(OperaEvent operaEvent, int number) {
         if (number > operaEvent.getMaxSeats()) {
             throw new RuntimeException("Количество мест не более " + operaEvent.getMaxSeats());
         }
@@ -83,6 +102,45 @@ public class OperaEventService {
         }
 
         placeRepository.deleteById(place.getId());
+    }
+
+    /**
+     * Покупка билета на мероприятие
+     *
+     * @param event    Мероприятие
+     * @param place    Номер места
+     * @param customer Имя покупателя
+     */
+    @Transactional
+    public void buyTicket(OperaEvent event, int place, String customer) {
+        OrderEvent orderEvent = new OrderEvent();
+        orderEvent.setCustomer(customer);
+        orderEvent.setPlace(setBookEvent(event, place));
+
+        orderRepository.save(orderEvent);
+    }
+
+    /**
+     * Отмена покупки билета
+     *
+     * @param operaEvent Мероприятие
+     * @param number     Номер места
+     * @param customer   Имя покупателя
+     */
+    @Transactional
+    public void cancelBuyTicket(OperaEvent operaEvent, int number, String customer) {
+        Place place = placeRepository.findByOperaEventAndNumber(operaEvent, number);
+        if (place == null) {
+            throw new IllegalArgumentException(String.format("Место %s ещё не занято", number));
+        }
+
+        OrderEvent orderEvent = orderRepository.findByCustomerAndPlace(customer, place);
+        if (orderEvent == null) {
+            throw new IllegalArgumentException(String.format("Вы не можете отменить покупку чужого места"));
+        }
+
+        cancelBookEvent(operaEvent, number);
+        orderRepository.delete(orderEvent);
     }
 
 }
