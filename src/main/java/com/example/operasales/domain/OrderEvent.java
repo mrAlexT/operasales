@@ -16,5 +16,7 @@ public class OrderEvent {
     @ManyToOne
     @JoinColumn(name = "place_id", referencedColumnName = "id")
     private Place place;
-    private String customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 }

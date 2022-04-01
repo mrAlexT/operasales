@@ -18,12 +18,12 @@ public class OperaService {
         this.repository = repository;
     }
 
-    public Opera createOpera(String name, String desc, int ageCategory) {
+    public Opera save(String name, String desc, int ageCategory) {
         Opera opera = new Opera(name, desc, ageCategory);
         return repository.save(opera);
     }
 
-    public Opera createOpera(Opera opera) {
+    public Opera save(Opera opera) {
         Opera result = repository.save(opera);
         return result;
     }

@@ -1,9 +1,7 @@
 package com.example.operasales.services;
 
-import com.example.operasales.domain.Opera;
-import com.example.operasales.domain.OperaEvent;
-import com.example.operasales.domain.OrderEvent;
-import com.example.operasales.domain.Place;
+import com.example.operasales.annotations.EmailAlerting;
+import com.example.operasales.domain.*;
 import com.example.operasales.repository.OperaEventRepository;
 import com.example.operasales.repository.OrderRepository;
 import com.example.operasales.repository.PlaceRepository;
@@ -27,13 +25,14 @@ public class OperaEventService {
         this.orderRepository = orderRepository;
     }
 
-    public OperaEvent createOperaEvent(LocalDateTime time, Opera opera, int maxSeats) {
+    @EmailAlerting("Новая премьера")
+    public OperaEvent save(LocalDateTime time, Opera opera, int maxSeats) {
         OperaEvent operaEvent = new OperaEvent(time, opera, maxSeats);
         repository.save(operaEvent);
         return operaEvent;
     }
 
-    public OperaEvent createOperaEvent(OperaEvent operaEvent) {
+    public OperaEvent save(OperaEvent operaEvent) {
         repository.save(operaEvent);
         return operaEvent;
     }
@@ -111,8 +110,9 @@ public class OperaEventService {
      * @param place    Номер места
      * @param customer Имя покупателя
      */
+    @EmailAlerting("Покупка билета")
     @Transactional
-    public void buyTicket(OperaEvent event, int place, String customer) {
+    public void buyTicket(OperaEvent event, int place, Customer customer) {
         OrderEvent orderEvent = new OrderEvent();
         orderEvent.setCustomer(customer);
         orderEvent.setPlace(setBookEvent(event, place));
@@ -127,8 +127,9 @@ public class OperaEventService {
      * @param number     Номер места
      * @param customer   Имя покупателя
      */
+    @EmailAlerting("Отмена покупки билета")
     @Transactional
-    public void cancelBuyTicket(OperaEvent operaEvent, int number, String customer) {
+    public void cancelBuyTicket(OperaEvent operaEvent, int number, Customer customer) {
         Place place = placeRepository.findByOperaEventAndNumber(operaEvent, number);
         if (place == null) {
             throw new IllegalArgumentException(String.format("Место %s ещё не занято", number));
