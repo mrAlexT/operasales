@@ -66,6 +66,10 @@ public class OperaEventService {
         repository.deleteAll();
     }
 
+    public void delete(OperaEvent operaEvent){
+        repository.delete(operaEvent);
+    }
+
 //    /**
 //     * Бронирование места
 //     *

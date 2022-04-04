@@ -1,6 +1,5 @@
 package com.example.operasales.domain;
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Data
 @Table(name = "OPERA_EVENT")
 public class OperaEvent {
     @Id
@@ -38,5 +36,37 @@ public class OperaEvent {
                 ", opera=" + opera.getName() +
                 ", maxSeats=" + maxSeats +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
+    public Opera getOpera() {
+        return opera;
+    }
+
+    public void setOpera(Opera opera) {
+        this.opera = opera;
+    }
+
+    public int getMaxSeats() {
+        return maxSeats;
+    }
+
+    public void setMaxSeats(int maxSeats) {
+        this.maxSeats = maxSeats;
     }
 }

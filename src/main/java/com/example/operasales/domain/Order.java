@@ -1,13 +1,11 @@
 package com.example.operasales.domain;
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "ORDER_EVENT")
 public class Order {
     @Id
@@ -25,4 +23,36 @@ public class Order {
 
     @OneToMany
     List<Place> places;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public OperaEvent getOperaEvent() {
+        return operaEvent;
+    }
+
+    public void setOperaEvent(OperaEvent operaEvent) {
+        this.operaEvent = operaEvent;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
+    }
 }

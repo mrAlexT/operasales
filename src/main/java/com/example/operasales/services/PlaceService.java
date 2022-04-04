@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlaceService {
 
-    private PlaceRepository repository;
+    final private PlaceRepository repository;
 
     @Autowired
     public PlaceService(PlaceRepository repository) {

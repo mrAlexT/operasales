@@ -1,14 +1,12 @@
 package com.example.operasales.domain;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Data
 public class Opera {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -37,5 +35,37 @@ public class Opera {
                 "name='" + name +
                 ", desc='" + description +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getAgeCategory() {
+        return ageCategory;
+    }
+
+    public void setAgeCategory(int ageCategory) {
+        this.ageCategory = ageCategory;
     }
 }

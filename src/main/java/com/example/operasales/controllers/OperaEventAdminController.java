@@ -9,28 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/api/events")
-public class OperaEventController {
-
+@RequestMapping("/admin/api/events")
+public class OperaEventAdminController {
     OperaEventService operaEventService;
     OperaService operaService;
 
     @Autowired
-    public OperaEventController(OperaEventService operaEventService, OperaService operaService) {
+    public OperaEventAdminController(OperaEventService operaEventService, OperaService operaService) {
         this.operaEventService = operaEventService;
         this.operaService = operaService;
     }
 
-
-    @GetMapping
-    public Collection<OperaEvent> getEvents() {
-        Collection<OperaEvent> operaEvents = operaEventService.getOperaEvents();
-        return operaEvents;
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
+    public OperaEvent createOperaEvent(@RequestBody OperaEvent operaEvent) {
+        OperaEvent result = operaEventService.createOperaEvent(operaEvent);
+        return result;
     }
 
-    @GetMapping("/{id}")
-    public OperaEvent getEvent(@PathVariable("id") String id) {
-        OperaEvent result = operaEventService.findById(id);
-        return result;
+    @DeleteMapping
+    public void deleteOperaEvent(@RequestBody OperaEvent operaEvent) {
+        operaEventService.delete(operaEvent);
     }
 }

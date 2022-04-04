@@ -1,13 +1,11 @@
 package com.example.operasales.domain;
 
-import lombok.Data;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Data
 @Check(constraints = "status in (0,1)")
 public class Place {
     @Id
@@ -21,7 +19,35 @@ public class Place {
     @JoinColumn(name = "opera_event_id")
     private OperaEvent operaEvent;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-//    OrderEvent orderEvent;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public OperaEvent getOperaEvent() {
+        return operaEvent;
+    }
+
+    public void setOperaEvent(OperaEvent operaEvent) {
+        this.operaEvent = operaEvent;
+    }
 }
