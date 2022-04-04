@@ -4,6 +4,8 @@ import com.example.operasales.domain.OperaEvent;
 import com.example.operasales.domain.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface PlaceRepository extends JpaRepository<Place, String> {
-    Place findByOperaEventAndNumber(OperaEvent operaEvent, int number);
+    Optional<Place> findByOperaEventAndNumber(OperaEvent operaEvent, int number);
 }

@@ -16,10 +16,12 @@ public class Place {
     private String id;
     private int number;
     private int status;
+
     @ManyToOne
     @JoinColumn(name = "opera_event_id")
     private OperaEvent operaEvent;
 
-    public Place() {
-    }
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+//    OrderEvent orderEvent;
 }

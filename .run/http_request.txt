@@ -1,0 +1,198 @@
+###
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "id": null,
+  "operaEvent": {
+    "id": "e4bda808-150d-4654-8ef1-1f8777052f86",
+    "time": "2022-04-04T03:02:08.024",
+    "opera": {
+      "id": "4d21fa7e-fd58-44b0-a378-e0edd5be9fa9",
+      "name": "Отелло",
+      "description": "Пьеса по Шекспиру",
+      "ageCategory": 18
+    },
+    "maxSeats": 25
+  },
+  "customer": {
+    "id": "d7ac7996-d083-43a5-9120-767f7a650d14",
+    "name": "Толстой Л.Н.",
+    "email": "tolstoy@russia.ru"
+  },
+  "places": [
+    {
+      "id": "dd156769-7642-438a-ad21-64b66dc38eda",
+      "number": 11,
+      "status": 1,
+      "operaEvent": {
+        "id": "e4bda808-150d-4654-8ef1-1f8777052f86",
+        "time": "2022-04-04T03:02:08.024",
+        "opera": {
+          "id": "4d21fa7e-fd58-44b0-a378-e0edd5be9fa9",
+          "name": "Отелло",
+          "description": "Пьеса по Шекспиру",
+          "ageCategory": 18
+        },
+        "maxSeats": 25
+      }
+    }
+  ]
+}
+
+<> 2022-04-04T122159.200.json
+
+###
+DELETE http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "id": "d81f28c6-3f3c-4824-bd40-237956a473cb",
+  "operaEvent": {
+    "id": "e4bda808-150d-4654-8ef1-1f8777052f86",
+    "time": "2022-04-04T03:02:08.024",
+    "opera": {
+      "id": "4d21fa7e-fd58-44b0-a378-e0edd5be9fa9",
+      "name": "Отелло",
+      "description": "Пьеса по Шекспиру",
+      "ageCategory": 18
+    },
+    "maxSeats": 25
+  },
+  "customer": {
+    "id": "d7ac7996-d083-43a5-9120-767f7a650d14",
+    "name": "Толстой Л.Н.",
+    "email": "tolstoy@russia.ru"
+  },
+  "places": [
+    {
+      "id": "dd156769-7642-438a-ad21-64b66dc38eda",
+      "number": 11,
+      "status": 1,
+      "operaEvent": {
+        "id": "e4bda808-150d-4654-8ef1-1f8777052f86",
+        "time": "2022-04-04T03:02:08.024",
+        "opera": {
+          "id": "4d21fa7e-fd58-44b0-a378-e0edd5be9fa9",
+          "name": "Отелло",
+          "description": "Пьеса по Шекспиру",
+          "ageCategory": 18
+        },
+        "maxSeats": 25
+      }
+    }
+  ]
+}
+
+<> 2022-04-04T122004.200.json
+<> 2022-04-04T121921.200.json
+<> 2022-04-04T121717.200.json
+
+
+###
+GET http://localhost:8080/api/orders/d81f28c6-3f3c-4824-bd40-237956a473cb
+Accept: application/json
+
+<> 2022-04-04T121624.200.json
+
+
+###
+GET http://localhost:8080/api/orders
+Accept: application/json
+
+<> 2022-04-04T121541.200.json
+<> 2022-04-04T031430.200.json
+<> 2022-04-04T030834.200.json
+<> 2022-04-04T030817.200.json
+<> 2022-04-04T030750.200.json
+<> 2022-04-04T030658.404.json
+
+###
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "id": "",
+  "time": "2022-05-03T17:39:39.572",
+  "opera": {
+    "id": "8e7de22b-cbc7-40c0-912c-de7404b81e2c",
+    "name": "Отелло",
+    "description": "Пьеса по Шекспиру",
+    "ageCategory": 18
+  },
+  "maxSeats": 25
+}
+
+<> 2022-04-03T192700.200.json
+<> 2022-04-03T192630.200.json
+<> 2022-04-03T192355.200.json
+<> 2022-04-03T192337.200.json
+
+###
+GET http://localhost:8080/api/events/39274360-909c-4078-bd4a-0d9820cc42c5
+Accept: application/json
+
+<> 2022-04-04T024604.200.json
+<> 2022-04-04T024451.200.json
+<> 2022-04-03T192300.200.json
+<> 2022-04-03T192206.200.json
+<> 2022-04-03T192126.200.json
+<> 2022-04-03T192120.200.json
+<> 2022-04-03T190520.200.json
+<> 2022-04-03T190456.200.json
+<> 2022-04-03T190452.500.json
+<> 2022-04-03T190446.200.json
+<> 2022-04-03T185946.200.json
+<> 2022-04-03T185751.200.json
+<> 2022-04-03T185607.200.json
+<> 2022-04-03T185603.200.json
+<> 2022-04-03T185519.200.json
+<> 2022-04-03T185512.500.json
+<> 2022-04-03T185459.200.json
+<> 2022-04-03T185424.500.json
+<> 2022-04-03T185412.500.json
+<> 2022-04-03T185250.500.json
+<> 2022-04-03T185131.500.json
+<> 2022-04-03T184356.200.json
+
+###
+PUT http://localhost:8080/api/operas
+Content-Type: application/json
+
+{
+  "id": "c6e57f93-5064-4759-84f4-16a7e06013d5",
+  "name": "Развитие капитализма в России (Ленин В.И.)",
+  "description": "Политическая сатира",
+  "ageCategory": 25
+}
+
+<> 2022-04-03T183826.200.json
+
+###
+POST http://localhost:8080/api/operas
+Content-Type: application/json
+
+{
+  "id": "",
+  "name": "Развитие капитализма в России",
+  "description": "Политическая сатира",
+  "ageCategory": 25
+}
+
+###
+GET http://localhost:8080/api/operas/6a4db6de-6839-4eb5-bb16-ed510201e423
+Accept: application/json
+
+<> 2022-04-04T024504.200.json
+<> 2022-04-03T182247.200.json
+
+###
+GET http://localhost:8080/api/operas
+Accept: application/json
+
+<> 2022-04-04T030829.200.json
+<> 2022-04-04T024508.200.json
+<> 2022-04-04T023219.200.json
+<> 2022-04-03T183918.200.json
+
+###

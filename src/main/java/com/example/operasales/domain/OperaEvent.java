@@ -9,13 +9,14 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Table(name = "OPERA_EVENT")
 public class OperaEvent {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
     private LocalDateTime time;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "opera_id", referencedColumnName = "id")
     private Opera opera;
     private int maxSeats;

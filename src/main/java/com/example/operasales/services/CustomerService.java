@@ -12,15 +12,11 @@ public class CustomerService {
         this.repository = repository;
     }
 
-    public Customer save(String name, String email){
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setEmail(email);
-
+    public Customer save(Customer customer) {
         return repository.save(customer);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         repository.deleteAll();
     }
 }

@@ -2,6 +2,7 @@ package com.example.operasales.aspects;
 
 import com.example.operasales.annotations.EmailAlerting;
 import com.example.operasales.domain.Customer;
+import com.example.operasales.domain.Order;
 import com.example.operasales.services.EmailService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -35,8 +36,8 @@ public class EmailAspect {
         Customer customer = null;
 
         for (Object arg : point.getArgs()) {
-            if (arg instanceof Customer) {
-                customer = (Customer) arg;
+            if (arg instanceof Order) {
+                customer = (Customer) ((Order) arg).getCustomer();
                 break;
             }
         }
